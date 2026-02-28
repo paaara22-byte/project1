@@ -1,0 +1,24 @@
+{
+  "name": "flood-end",
+  "version": "1.0.0",
+  "description": "Smart Flood Control backend and dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev:api": "node server.js",
+    "dev:dashboard": "cd dashboard && npm run dev",
+    "build:dashboard": "cd dashboard && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.98.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.0"
+  }
+}
