@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  @apply antialiased;
+}
+
+body {
+  @apply font-sans m-0 min-h-screen text-slate-800;
+}
+
+html:not(.dark) body {
+  background: linear-gradient(160deg, #e0f2fe 0%, #cffafe 40%, #e0f2fe 100%);
+}
+
+.dark body {
+  @apply bg-slate-950 text-slate-100;
+  background-image: 
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(6,182,212,0.12), transparent),
+    linear-gradient(180deg, #0f172a 0%, #020617 100%);
+}
+
+/* Glassmorphism panels */
+.glass-panel {
+  @apply rounded-xl border backdrop-blur-xl relative;
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Geometric pattern overlay */
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: 
+    linear-gradient(135deg, rgba(6, 182, 212, 0.03) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(6, 182, 212, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(6, 182, 212, 0.02) 25%, transparent 25%);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Sidebar card stack */
+.sidebar-card {
+  @apply rounded-xl border backdrop-blur-xl relative overflow-hidden;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+.dark .sidebar-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Leaflet: map tiles stay standard bright; no dark-mode filter applied to map */
+/* Map popups stay light so map appearance is unchanged in dark mode */
+.leaflet-popup-content-wrapper {
+  @apply rounded-xl backdrop-blur-md border;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.leaflet-popup-content {
+  @apply m-3 text-sm;
+}
+
+/* Stream console matrix effect */
+.stream-line {
+  animation: streamFade 0.25s ease-out;
+}
+
+@keyframes streamFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow badge */
+.badge-glow-stable {
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+}
+
+.badge-glow-critical {
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.6);
+}
+
+/* Chart glow */
+.recharts-line-curve {
+  filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.5));
+}
+
+/* Hide scrollbar but keep scroll behavior (IoT console) */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smart Evacuation Routing: dashed glowing green line animation */
+.leaflet-interactive.evacuation-route {
+  stroke: #22c55e;
+  stroke-width: 3;
+  stroke-dasharray: 12 8;
+  animation: evacuationDash 1.2s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.8));
+}
+.leaflet-interactive.evacuation-route-glow {
+  stroke: rgba(34, 197, 94, 0.4);
+  stroke-width: 8;
+  stroke-dasharray: 12 8;
+  animation: evacuationDash 1.2s linear infinite;
+}
+@keyframes evacuationDash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* Safe Zone marker: no default Leaflet div-icon border */
+.safe-zone-marker.leaflet-div-icon {
+  border: none;
+  background: transparent;
+}
+
+/* Humanitarian Aid Point marker: no default Leaflet div-icon border */
+.humanitarian-aid-marker.leaflet-div-icon {
+  border: none;
+  background: transparent;
+}
+
+/* Critical toast: enter from right, then subtle pulse */
+.critical-toast-enter {
+  animation: toastSlideIn 0.3s ease-out, toastPulse 2.5s ease-in-out 0.3s infinite;
+}
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes toastPulse {
+  0%, 100% {
+    box-shadow: 0 10px 40px rgba(239, 68, 68, 0.25), 0 0 0 1px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4), 0 0 0 2px rgba(239, 68, 68, 0.6);
+  }
+}
